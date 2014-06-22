@@ -1,0 +1,17 @@
+/* a small, resizable text area */
+textarea.ta_resizable {
+  width: 35em;
+  height: 4em;
+  max-height: 15em;
+  max-width: 60em;
+  resize: both;
+}
+
+/* a large, resizable text area */
+textarea.ta_resizable_lg {
+  width: 35em;
+  height: 10em;
+  max-height: 20em;
+  max-width: 70em;
+  resize: both;
+}

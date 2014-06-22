@@ -1,0 +1,2 @@
+<?php
+if (!cmsms()) exit;

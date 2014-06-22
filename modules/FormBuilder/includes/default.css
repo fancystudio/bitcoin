@@ -1,0 +1,92 @@
+/* Sample FormBuilder CSS base */
+form {
+	margin-top: 0
+}
+form, td, th, li {
+	font-size: 100%
+}
+form div {
+	margin-bottom: 0
+}
+fieldset div {
+	margin-bottom: 0.5em;
+	margin-left: 1em;
+}
+fieldset div div {
+	margin-top: 0.5em;
+	margin-left: 1em
+}
+fieldset {
+	margin-bottom: 1em;
+	border: 1px solid #F60;
+	padding: 0.5em
+}
+fieldset label {
+	width: auto;
+}
+legend {
+	color: #FFF;
+	background: #F60;
+	font-style: italic;
+	font-size: 1.2em;
+	margin-bottom: 0.5em;
+	padding: 0.2em;
+	width: auto;
+	border: 1px solid #CCC
+}
+textarea {
+	margin: 0.5em 0;
+	width: 98%;
+	height: 6em
+}
+/* Apply this class to text/select input fields with shorter labelsto help alignment */
+.short-label label {
+	float: left;
+	width: 10em
+}
+.short-label fieldset div input, .short-label fieldset div select {
+	width: 16em
+}
+/* Pretty up your Captcha image output */
+.captcha {
+	margin: 0.5em 0;
+	width: 200px;
+	text-align: center
+}
+.captcha img {
+	border: 1px solid #F60;
+	margin-bottom: 0.5em
+}
+.captcha input {
+	width: 196px;
+	margin-top: 0.5em
+}
+/* Just a bit more room for the Submit button */
+.submit {
+	margin-top: 0.5em
+}
+.contactform input {
+	border: 1px solid #f60;
+}
+.contactform input.checkbox {
+	border: none;
+}
+.contactform label {
+	display: block;
+	float: left;
+	width: 150px;
+}
+.contactform label.label {
+	display: inline;
+	float: none;
+	width: 50px;
+	font-size: 10px;
+}
+.contactform textarea {
+	background-color: #ffc;
+	border: 1px solid #f60;
+}
+.formbuilderform .message {
+	line-height: 16px;
+	padding: 0 0 8px 0;
+}

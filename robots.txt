@@ -1,0 +1,10 @@
+Sitemap: http://kupitbitcoin.sk/sitemap.xml
+User-agent: *
+Disallow: /data/k/u/kupitbitcoin.sk/web/admin/
+Disallow: /data/k/u/kupitbitcoin.sk/web/contrib/
+Disallow: /data/k/u/kupitbitcoin.sk/web/doc/
+Disallow: /data/k/u/kupitbitcoin.sk/web/lib/
+Disallow: /data/k/u/kupitbitcoin.sk/web/modules/
+Disallow: /data/k/u/kupitbitcoin.sk/web/plugins/
+Disallow: /data/k/u/kupitbitcoin.sk/web/scripts/
+Disallow: /data/k/u/kupitbitcoin.sk/web/tmp/

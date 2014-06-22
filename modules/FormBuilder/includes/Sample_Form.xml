@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form id="4"
+	alias="sample_form">
+		<form_name><![CDATA[Sample Form]]></form_name>
+		<attribute key="submit_action"><![CDATA[text]]></attribute>
+		<attribute key="input_button_safety"><![CDATA[0]]></attribute>
+		<attribute key="use_catcha"><![CDATA[]]></attribute>
+		<attribute key="title_user_captcha"><![CDATA[Please confirm that you are not a script by entering the letters from the image.]]></attribute>
+		<attribute key="prev_button_text"><![CDATA[Back...]]></attribute>
+		<attribute key="inline"><![CDATA[0]]></attribute>
+		<attribute key="submit_javascript"><![CDATA[]]></attribute>
+		<attribute key="form_template"><![CDATA[{* DEFAULT FORM LAYOUT / pure CSS *}
+{$fb_form_header}
+{if $fb_form_done == 1}
+	{* This first section is for displaying submission errors *}
+	{if $fb_submission_error}
+		<div class="error_message">{$fb_submission_error}</div>
+		{if $fb_show_submission_errors}
+			<div class="error">
+			<ul>
+			{foreach from=$fb_submission_error_list item=thisErr}
+				<li>{$thisErr}</li>
+			{/foreach}
+			</ul>
+		</div>
+		{/if}
+	{/if}
+{else}
+	{* this section is for displaying the form *}
+	{* we start with validation errors *}
+	{if $fb_form_has_validation_errors}
+		<div class="error_message">
+		<ul>
+		{foreach from=$fb_form_validation_errors item=thisErr}
+			<li>{$thisErr}</li>
+		{/foreach}
+		</ul>
+		</div>
+	{/if}
+	{if $captcha_error}
+		<div class="error_message">{$captcha_error}</div>
+	{/if}
+
+	{* and now the form itself *}
+	{$fb_form_start}
+	<div>{$fb_hidden}</div>
+	<div{if $css_class != ''} class="{$css_class}"{/if}>
+	{if $total_pages gt 1}<span>{$title_page_x_of_y}</span>{/if}
+	{foreach from=$fields item=entry}
+		{if $entry->display == 1}
+        	{strip}
+         	{if $entry->needs_div == 1}
+            	<div
+            	{if $entry->required == 1 || $entry->css_class != ''} class="
+              		{if $entry->required == 1}
+                		required
+              		{/if}
+              		{if $entry->required == 1 && $entry->css_class != ''} {/if}
+              		{if $entry->css_class != ''}
+                		{$entry->css_class}
+              		{/if}
+              		"
+            	{/if}
+            	>
+         	{/if}
+         	{if $entry->hide_name == 0}
+            	<label{if $entry->multiple_parts != 1} for="{$entry->input_id}"{/if}>{$entry->name}
+            	{if $entry->required_symbol != ''}
+               		{$entry->required_symbol}
+            	{/if}
+            	</label>
+         	{/if}
+         	{if $entry->multiple_parts == 1}
+            	{section name=numloop loop=$entry->input}
+               		{if $entry->label_parts == 1}
+               			<div>{$entry->input[numloop]->input}&nbsp;{$entry->input[numloop]->name}</div>
+               		{else}
+               			{$entry->input[numloop]->input}
+               		{/if}
+               		{if $entry->input[numloop]->op}{$entry->input[numloop]->op}{/if}
+            	{/section}
+         	{else}
+            	{if $entry->smarty_eval == '1'}{eval var=$entry->input}{else}{$entry->input}{/if}
+         	{/if}
+         	{if $entry->valid == 0} &lt;--- {$entry->error}{/if}
+         	{if $entry->needs_div == 1}
+            	</div>
+         	{/if}
+         	{/strip}
+     	{/if}
+	{/foreach}
+	{if $has_captcha == 1}
+		<div class="captcha">{$graphic_captcha}{$title_captcha}<br />{$input_captcha}</div>
+	{/if}
+	<div class="submit">{$prev}{$submit}</div>
+	</div>
+	{$fb_form_end}
+{/if}
+{$fb_form_footer}]]></attribute>
+		<attribute key="title_position"><![CDATA[left]]></attribute>
+		<attribute key="list_delimiter"><![CDATA[ - ]]></attribute>
+		<attribute key="required_field_symbol"><![CDATA[*]]></attribute>
+		<attribute key="unspecified"><![CDATA[[unspecified]]]></attribute>
+		<attribute key="next_button_text"><![CDATA[Continue...]]></attribute>
+		<attribute key="submit_button_text"><![CDATA[Send Feedback]]></attribute>
+		<attribute key="form_displaytype"><![CDATA[tab]]></attribute>
+		<attribute key="redirect_page"><![CDATA[-1]]></attribute>
+		<attribute key="css_class"><![CDATA[formbuilderform]]></attribute>
+		<attribute key="captcha_wrong"><![CDATA[Captcha was not correct.]]></attribute>
+		<attribute key="submit_response"><![CDATA[<h1>Thanks!</h1>
+
+<p>Your feedback helps me make this a better module.</p>
+
+<p>If you'd like to contribute to the future development of FormBuilder, you can make a donation below. I will be happy to give donors credit as a sponsor in the FormBuilder help. Every bit helps!</p>
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="2057231">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+]]></attribute>
+	<field id="26"
+		type="FieldsetStart"
+		validation_type=""
+		order_by="2"
+		required="0"
+		hide_label="0"
+		alias="">
+			<field_name><![CDATA[Fieldset Start]]></field_name>
+			<options>
+			<option name="legend"><![CDATA[Help Improve Form Builder]]></option>
+			<option name="css_class"><![CDATA[]]></option>
+			<value></value>
+			</options>
+</field>
+	<field id="27"
+		type="DispositionEmail"
+		validation_type=""
+		order_by="3"
+		required="0"
+		hide_label="0"
+		alias="">
+			<field_name><![CDATA[Send It]]></field_name>
+			<options>
+			<option name="email_subject"><![CDATA[FormBuilder Sample Form Submission]]></option>
+			<option name="email_from_name"><![CDATA[Form Builder Installation]]></option>
+			<option name="email_from_address"><![CDATA[you@yourhost.com]]></option>
+			<option name="destination_address"><![CDATA[sjg@cmsmodules.com]]></option>
+			<option name="email_template"><![CDATA[<h1>Someone's Testing a FormBuilder Submission!</h1>
+<strong>Form Name</strong>: {$sub_form_name}<br />
+<strong>Date of Submission</strong>: {$sub_date}<br />
+<strong>Your server</strong>: {$sub_host}<br />
+<strong>IP address of person using form</strong>: {$sub_source_ip}<br />
+<strong>URL of page containing form</strong>: {$sub_url}<br />
+
+<hr />
+<strong>Modules you'll be using together</strong>: {$modules_you_ll_be_using}<br />
+<strong>What will you personally be doing on your CMS MS site?</strong>: {$what_will_you}<br />
+<strong>Where are you from?</strong>: {$where_are_you_from_}<br />
+<strong>Do you have any comments / feedback for me?</strong>: {$do_you_have_any}<br />
+]]></option>
+			<option name="email_encoding"><![CDATA[utf-8]]></option>
+			<option name="html_email"><![CDATA[1]]></option>
+			<value></value>
+			</options>
+</field>
+	<field id="28"
+		type="StaticTextField"
+		validation_type=""
+		order_by="4"
+		required="0"
+		hide_label="0"
+		alias="">
+			<field_name><![CDATA[Welcome!]]></field_name>
+			<options>
+			<option name="text"><![CDATA[Thanks for trying out FormBuilder. You can use this form to provide me with feedback about how you will be using Form Builder, so I can best allocate resources for future development. Thanks, ___Samuel___]]></option>
+			<option name="css_class"><![CDATA[message]]></option>
+			<option name="field_alias"><![CDATA[]]></option>
+			<value></value>
+			</options>
+</field>
+	<field id="29"
+		type="CheckboxGroupField"
+		validation_type=""
+		order_by="5"
+		required="0"
+		hide_label="0"
+		alias="">
+			<field_name><![CDATA[Modules you'll be using together]]></field_name>
+			<options>
+			<option name="no_empty"><![CDATA[]]></option>
+			<option name="box_name"><![CDATA[FormBuilder]]></option>
+			<option name="box_name"><![CDATA[FormBrowser]]></option>
+			<option name="box_name"><![CDATA[Front End Users]]></option>
+			<option name="box_name"><![CDATA[Newsletter Made Simple (NMS)]]></option>
+			<option name="box_name"><![CDATA[Cataloger]]></option>
+			<option name="box_name"><![CDATA[Other(s)]]></option>
+			<option name="box_checked"><![CDATA[FormBuilder]]></option>
+			<option name="box_checked"><![CDATA[FormBrowser]]></option>
+			<option name="box_checked"><![CDATA[FEU]]></option>
+			<option name="box_checked"><![CDATA[NMS]]></option>
+			<option name="box_checked"><![CDATA[Cataloger]]></option>
+			<option name="box_checked"><![CDATA[Other(s)]]></option>
+			<option name="box_unchecked"><![CDATA[(not FormBuilder)]]></option>
+			<option name="box_unchecked"><![CDATA[(not FormBrowser)]]></option>
+			<option name="box_unchecked"><![CDATA[(not FEU)]]></option>
+			<option name="box_unchecked"><![CDATA[(not NMS)]]></option>
+			<option name="box_unchecked"><![CDATA[(not Cataloger)]]></option>
+			<option name="box_unchecked"><![CDATA[(no Others)]]></option>
+			<option name="box_is_set"><![CDATA[y]]></option>
+			<option name="box_is_set"><![CDATA[n]]></option>
+			<option name="box_is_set"><![CDATA[n]]></option>
+			<option name="box_is_set"><![CDATA[n]]></option>
+			<option name="box_is_set"><![CDATA[n]]></option>
+			<option name="box_is_set"><![CDATA[n]]></option>
+			<value></value>
+			</options>
+</field>
+	<field id="30"
+		type="CheckboxGroupField"
+		validation_type=""
+		order_by="6"
+		required="0"
+		hide_label="0"
+		alias="">
+			<field_name><![CDATA[What will you personally be doing on your CMS MS site?]]></field_name>
+			<options>
+			<option name="no_empty"><![CDATA[1]]></option>
+			<option name="box_name"><![CDATA[Graphical Design]]></option>
+			<option name="box_name"><![CDATA[HTML and CSS]]></option>
+			<option name="box_name"><![CDATA[Write / Maintain Content]]></option>
+			<option name="box_name"><![CDATA[Edit Smarty Templates]]></option>
+			<option name="box_name"><![CDATA[Write Modules]]></option>
+			<option name="box_name"><![CDATA[Write Core CMS code]]></option>
+			<option name="box_name"><![CDATA[Donate to Core/Module Developes]]></option>
+			<option name="box_checked"><![CDATA[Graphical Design]]></option>
+			<option name="box_checked"><![CDATA[HTML/CSS]]></option>
+			<option name="box_checked"><![CDATA[Content]]></option>
+			<option name="box_checked"><![CDATA[Smarty]]></option>
+			<option name="box_checked"><![CDATA[Modules]]></option>
+			<option name="box_checked"><![CDATA[Core]]></option>
+			<option name="box_checked"><![CDATA[donate!]]></option>
+			<option name="box_unchecked"><![CDATA[]]></option>
+			<option name="box_unchecked"><![CDATA[]]></option>
+			<option name="box_unchecked"><![CDATA[]]></option>
+			<option name="box_unchecked"><![CDATA[]]></option>
+			<option name="box_unchecked"><![CDATA[]]></option>
+			<option name="box_unchecked"><![CDATA[]]></option>
+			<option name="box_unchecked"><![CDATA[]]></option>
+			<option name="box_is_set"><![CDATA[n]]></option>
+			<option name="box_is_set"><![CDATA[n]]></option>
+			<option name="box_is_set"><![CDATA[n]]></option>
+			<option name="box_is_set"><![CDATA[n]]></option>
+			<option name="box_is_set"><![CDATA[n]]></option>
+			<option name="box_is_set"><![CDATA[n]]></option>
+			<option name="box_is_set"><![CDATA[n]]></option>
+			<option name="css_class"><![CDATA[]]></option>
+			<value></value>
+			</options>
+</field>
+	<field id="31"
+		type="CountryPickerField"
+		validation_type=""
+		order_by="7"
+		required="0"
+		hide_label="0"
+		alias="">
+			<field_name><![CDATA[Where are you from?]]></field_name>
+			<options>
+			<option name="default"><![CDATA[]]></option>
+			<option name="select_one"><![CDATA[Select One]]></option>
+			<option name="css_class"><![CDATA[]]></option>
+			<value></value>
+			</options>
+</field>
+	<field id="32"
+		type="TextAreaField"
+		validation_type=""
+		order_by="8"
+		required="0"
+		hide_label="0"
+		alias="">
+			<field_name><![CDATA[Do you have any comments / feedback for me?]]></field_name>
+			<options>
+			<option name="css_class"><![CDATA[]]></option>
+			<option name="rows"><![CDATA[10]]></option>
+			<option name="cols"><![CDATA[60]]></option>
+			<value></value>
+			</options>
+</field>
+	<field id="33"
+		type="FieldsetEnd"
+		validation_type=""
+		order_by="9"
+		required="0"
+		hide_label="0"
+		alias="">
+			<field_name><![CDATA[Fieldset End]]></field_name>
+			<options>
+			<option name="css_class"><![CDATA[]]></option>
+			<value></value>
+			</options>
+</field>
+</form>

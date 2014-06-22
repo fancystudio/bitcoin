@@ -1,0 +1,1405 @@
+
+
+/* ==========================================================================
+   fancystudio
+   ========================================================================== */
+html{
+	position: relative;
+	max-height: 100%;
+	overflow-x: hidden
+}
+
+body{
+	color: #373737;
+	font-weight: 200;
+	max-height: 100%;
+	position: relative;
+	overflow-x: hidden;
+	-webkit-backface-visibility: hidden;
+}
+
+:focus { outline: none; }
+
+a{
+	color: #373737;
+	background: url();
+	text-decoration: none !important;
+}
+
+.modal{
+	z-index: 99999
+}
+
+a:hover{
+	color: #3A3733
+}
+
+.centered{
+	text-align: center
+}
+
+label {
+display: inline-block;
+margin-bottom: 5px;
+font-weight: bold;
+}
+
+/* ===================================== hlavicka ===================================== */
+
+
+.okamzite-btn{
+	display: none
+}
+
+.navbar-default .navbar-toggle {
+border-color: #373737;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+background-color: #373737;
+}
+
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+background-color: #f3f3f3;
+}
+
+.langs {
+position: absolute;
+right: 0px;
+top: -27px;
+}
+
+.langs img{
+	width: 26px
+}
+
+.header h1{
+	padding: 0;
+	margin: 0;
+}
+
+.header{
+	margin-top: 28px;
+	position: relative;
+}
+
+.navbar-default {
+	background-color: transparent; 
+	border-color: transparent;
+}
+
+.tabulka-mien-wrapper, .header h1{
+	width: 30%;
+}
+
+
+
+.header .navbar{
+	width: 40%;
+	float: left
+}
+
+.header .nav.nav-pills a{
+	background-color: none
+}
+
+.header .nav.nav-pills a:hover{
+	background-color: none
+}
+
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+	color: #4f4f4f;
+	background-color: transparent;
+}
+
+.nav > li > a:hover, .nav > li > a:focus {
+	text-decoration: none;
+	background-color: transparent;
+	color: #3f3f3f;
+}
+
+.nav > li > a {
+	position: relative;
+	display: block;
+	padding: 0px 15px;
+	font-size: 16px;
+	text-transform: uppercase;
+	margin-top: 20px;
+	height: 18px;
+	text-align: center;
+}
+
+.currency-chart{
+	background-color: #f3f3f3;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 7px 15px;
+	display: block;
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	behavior: url(/pie/pie.htc);
+	position: relative;
+	border: 1px solid lightgrey;
+}
+
+.header table tr td span{
+	font-size: 13px;
+}
+
+.chart-sell, .chart-buy{
+	font-size: 16px !important;
+}
+
+.currency-chart .icons  {
+	background: url(../img/spirite.svg);
+	width: 14px;
+	display: block;
+	height: 13px;
+	margin: 0px 0px 1px 8px;
+}
+
+.no-inlinesvg .currency-chart .icons {
+	background: url(../img/spirite.png);
+}
+
+.prevod{
+	background-position: 0px 0px;	
+}
+
+.karta{
+	background-position: -14px 0px !important;	
+}
+
+.exchange-symbol {
+padding-top: 60px;
+}
+
+/* ===================================== hlavicka ===================================== */
+
+/* ================================== main-content ==================================== */
+
+.main-content-wrap{
+	width: 100%;
+	margin-top: 25px;
+	background: url(../img/bg-main-content-wrap.jpg) #e3a31a;
+	background-repeat: no-repeat;
+	background-position: center top;
+	position: relative;
+}
+
+.available-info {
+	display: block;
+	background-color: #f0efee;
+	text-align: center;
+	width: 80%;
+	margin: 0 auto;
+	border-radius: 20px 20px 20px 20px;
+	-webkit-border-radius: 20px 20px 20px 20px;
+	-moz-border-radius: 0px 0px 20px 20px;
+	behavior: url(/pie/pie.htc);
+	padding: 5px 0px 5px 0px;
+	margin-top: 25px;
+	position: relative;
+	font-size: 18px;
+	clear: both
+}
+
+.info-text p {
+	margin: 30px 0 15px 0;
+	color: #322306;
+	text-align: center;
+	font-size: 19px;
+	line-height: normal;
+	clear: both;
+}
+
+.inputs input{
+	border: 3px solid white;
+	background-color: transparent;
+	float: left;
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+	background-color: transparent;
+	color: white;
+	font-size: 19px;
+	padding: 10px 10px 10px 10px;
+	font-weight: 200;
+	padding-bottom: 15px\9;
+	behavior: url(/pie/pie.htc);
+	position: relative;
+}
+
+.main-btn {
+	width: 100%;
+	margin: 20px 0px 40px 0px;
+	border-radius: 0px !important;
+	-webkit-border-radius: 0px !important;
+    -moz-border-radius: 0px !important;
+    font-size: 16px !important;
+	background-color: white !important;
+	color: #373737 !important;
+	font-weight: 400 !important;
+	behavior: url(/pie/pie.htc);
+	position: relative;
+}
+
+
+
+.main-btn:hover {
+	background-color: transparent !important;
+	color: white !important;
+}
+
+.inputs.form-horizontal{
+	text-align: center;
+	margin: 0 auto;
+	width: 230px;
+}
+
+.inputs.currency{
+	text-align: center;
+	width: 328px;
+	margin-left: 50%;
+	left: -164px;
+	position: relative;
+	display: block;
+	margin-top: 60px
+}
+
+.text-input{
+	width: 154px
+}
+
+.button{
+	background: url(../img/spirite.svg);
+	float: left;
+	display: block;
+	width: 11px;
+	height: 15px;
+	cursor: pointer;
+	text-indent: -99999px;	
+}
+
+.no-inlinesvg .button{
+	background: url(../img/spirite.png);
+}
+
+.inc.button{
+	margin-left: -18px;
+	margin-top: 9px;
+	background-position: -29px 0px;
+	position: relative;
+	z-index: 10;
+}
+
+no-inlinesvg .inc{
+	background-position: -29px 0px;
+}
+
+.dec.button{
+	margin-left: -18px;
+	margin-top: 30px;
+	background-position: -40px 0px;
+	position: relative;
+	z-index: 10;
+}
+
+.rovnasa {
+	float: left;
+	color: white;
+	font-weight: 200;
+	font-size: 16px;
+	padding: 13px 5px 0px 5px;
+	display: block
+}
+
+.read-only{
+	background-color: rgba(177, 100, 8, 0.7) !important;
+	border: none !important;
+	padding: 13px 3px 13px 13px !important;
+}
+
+.no-rgba .read-only{
+	background-color: #c57105;
+}
+
+.button-submit{
+	clear: both
+}
+
+.stred-logo{
+	position: relative;
+	height: 536px
+}
+
+.whiteline {
+	width: 2px;
+	background-color: white;
+	position: absolute;
+	margin-left: -1px;
+	left: 50%;
+}
+
+.a1{
+	height: 32%;
+	margin-top: 6%;
+}
+
+.a2{
+	height: 32%;
+	margin-bottom: 6%;
+	bottom: 0px
+}
+
+.stred-logo img{
+	position: absolute;
+	top: 50%;
+	margin-top: -71px;
+	left: 50%;
+	margin-left: -71px;
+}
+
+.content{
+	padding-top: 30px
+}
+
+
+.piktogram {
+	text-align: center;
+	margin-top: 40px
+}
+
+.piktogram h3{
+	color: #db9a1a
+}
+
+.piktogram.center{
+	border-right: 1px solid lightgrey;
+
+}
+
+.content h2{
+	color: #db9a1a;
+	text-align: center;
+	display: block;
+	font-size: 3em;
+	padding-bottom: 0px
+}
+
+.content p{
+	text-align: center;
+}
+
+.footer-containter {
+	color: #949292 !important;
+	border-top: 1px solid #949292;
+	padding-top: 30px;
+	margin-top: 50px;
+	padding-bottom: 15px;
+}
+
+.fblogo img{
+	margin-top: -5px;
+margin-left: 25px;
+}
+
+.fancybrand{
+	font-size: 11px
+}
+.footer li a  {
+	padding: 2px 5px;
+	font-size: 12px;
+	margin-top: -1px;
+}
+
+.copyright{
+	margin-right: 15px
+}
+
+
+.tooltip-inner {
+  color: #322306;
+  background-color: #f0efee;
+}
+
+.tooltip.bottom .tooltip-arrow {
+
+  border-bottom-color: #f0efee;
+
+}
+
+
+#sell-online-card, #buy-bitcoin-info {
+background: url(../img/currency-euro.png) no-repeat right;
+/*background-position: 108px 14px;*/
+background-position: 84% 49%;
+}
+
+#buy-bitcoin-info {
+/*background-position: 108px 18px;*/
+background-position: 84% 49%;
+}
+
+#sell-online-card-info, #buy-bitcoin {
+background: url(../img/currency-bitcoin.png) no-repeat right;
+/*background-position: 108px 14px;*/
+background-position: 84% 49%;
+}
+
+#buy-bitcoin {
+/*background-position: 108px 11px;*/
+background-position: 84% 49%;
+}
+
+
+
+/*.swiper-slide, .swiper-wrapper{
+	height: auto !important
+}*/
+
+.swiper-wrapper{
+	height: auto !important;
+}
+
+.swiper-slide{
+	height: 100px !important}
+
+.swiper-slide-active{
+	height: auto !important
+}
+
+
+
+.sell-online-card-notvalid {
+
+}
+
+
+.emailInputValidation, .numberInputValidation, .adresaZKtorejSaPosielaValidation, .menoNazovSepaValidation, .ulicaSepaValidation, .mestoSepaValidation, .smerovacieCisloSepaValidation, .ibanSepaValidation, .swiftBicSepaValidation {
+	display: block;
+	clear: both;
+	padding-top: 0px;
+	margin-left: 210px;
+	float: left;
+	margin-top: -15px;
+	margin-bottom: 10px;
+	font-size: 12px;
+	font-weight: 400;
+	color: red;
+}
+
+
+h3 .typeOfServiceTitle {
+	color: white;
+	border-bottom: 2px solid white;
+	padding-bottom: 15px;
+	font-weight: 200;
+}
+
+.second-step-inputs {
+	background: white;
+	float: left;
+	width: 100%;
+	color: #4f4f4f;
+}
+
+.second-step-inputs {
+	background: #f0efee;
+	float: left;
+	width: 100%;
+	color: #4f4f4f;
+	padding: 25px 25px 25px 25px;
+	margin-top: 20px;
+	border-radius: 5px;
+	border: 1px solid #f0efee;
+	/*max-height: 408px !important*/
+}
+
+
+.clientFirstNameValue, .clientLastNameValue, .clientEmailValue, .clientCisloPenazenkyValue, .clientHodnotaZValue, .clientHodnotaDoValue, .clientAdresaZKtorejSaPosielaValue, .clientCisloObjednavkyValue, .clientCisloUctuValue, .clientMenoNazovSepaValue, .clientUlicaSepaValue, .clientMestoSepaValue, .clientSmerovacieCisloSepaValue, .clientIbanSepaValue, .clientSwiftBicSepaValue  {
+	font-weight: bold !important;
+}
+
+
+
+.finalizacia{
+	min-height: 300px;
+	font-size: 25px;
+text-align: center;
+}
+
+.finalizacia h4{
+	font-size: 30px
+}
+
+.second-step-inputs h4, .second-step-inputs .rovnasa {
+	color: #4f4f4f;
+	
+}
+
+.secondStep .button-submit{
+	clear: none;
+	padding: 5px 0px 5px 0px;
+}
+
+
+
+.secondStep .rovnasa{
+	width: 200px
+}
+
+
+.captcha-row{
+	clear: both
+}
+.vpb_info{
+	font-weight: bold;
+	color: red
+}
+
+.clientEmail, .clientFirstName, .clientLastName, .clientCisloPenazenky, .clientCisloUctu, .clientSuma, .clientHodnotaZ, .clientHodnotaDo, .clientCisloObjednavky,.clientAdresaZKtorejSaPosiela, .clientCisloObjednavky, .clientMenoNazovSepa, .clientUlicaSepa, .clientMestoSepa, .clientSmerovacieCisloSepa, .clientIbanSepa, .clientSwiftBicSepa {
+	padding: 10px 0px 10px 0px;
+}
+
+.navigation .button-submit{
+	padding-left: 0px;
+	padding-right: 0px
+}
+
+.secondStep .formular-2-step input, .thirdStep .formular-2-step input, .select-country {
+	border: 1px solid lightgrey;
+	background-color: white;
+	padding: 7px 0px 7px 10px;
+	position: relative;
+	font-weight: bold;
+	font-size: 14px;
+	margin-bottom: 20px;
+	width: 260px;
+	color: #4f4f4f;
+}
+
+.thirdStep h5{
+	border: solid 1px lightgrey;
+	border-radius: 21px;
+	padding: 10px;
+	color: white;
+	background: #373737;
+}
+
+.cisloPenazenkyInput{
+	width: 350px !important
+}
+
+.formular-2-step .text-input{
+	width: auto
+}
+
+.secondStep .navigation {
+	float: left;
+	width: 100%;
+
+}
+
+.col-md-4.sposobPlatby label{
+	width: 100%;
+	cursor: pointer;
+	border: 3px solid black;
+	border-radius: 9px;
+	padding: 8px 20px;
+	font-weight: bold;
+	min-height: 58px;
+}
+
+.col-md-4.sposobPlatby label:hover{
+	background: #f8f7f6;
+}
+
+p.trustpay {
+	margin-left: 25px;
+	font-size: 11px;
+	margin-bottom: 0px;
+	font-weight: normal !important;
+}
+
+.iradio_flat{
+	margin-right: 15px
+}
+
+.col-md-4.sposobPlatby .list{
+	padding-left: 0px
+}
+
+.iCheck-helper{
+	width: 100%
+}
+
+
+
+#panel{
+  position:absolute;
+  background:#373737;
+  color:#fff;
+  height:100%;
+  width:250px; 
+  left:-250px;
+  transition: left 0.4s ease-in-out;
+  -o-transition: left 0.4s ease-in-out;
+  -ms-transition: left 0.4s ease-in-out;
+  -moz-transition: left 0.4s ease-in-out;
+  -webkit-transition: left 0.4s ease-in-out;
+  z-index: 99999;
+}
+#panel h2, #panel p{
+  padding:10px 15px;
+  font-size: 12px; 
+}
+
+#panel h2{
+font-size: 20px !important;
+  padding:15px;
+  
+}
+#panelCaller{
+  position:absolute;
+  top:25px;
+  left:250px;
+  padding:30px 10px;
+  background:#373737; 
+  text-align: center;
+  font-size: 12px;
+  border-radius: 0px 10px 10px 0px;
+  -moz-border-radius: 0px 10px 10px 0px;
+  -webkit-border-radius: 0px 10px 10px 0px;
+}
+
+#panelCaller img{
+  margin-bottom: 5px
+}
+#panel:hover{
+  left:0px;
+}
+
+.offset-second-step{
+	margin-left: 15px
+}
+
+.footer-logos{
+	float: left
+}
+
+/* kontakt */
+
+.main-content h2 {
+color: white;
+font-size: 3em;
+text-align: center;
+padding: 10px 0px 20px 0px;
+}
+
+#contactform legend{
+	color: #db9a1a !important;
+}
+
+.btn-primary {
+color: #ffffff;
+background-color: #db9a1a;
+border-color: #db9a1a;
+}
+
+.btn-primary:hover {
+color: #ffffff;
+background-color: #c57105;
+border-color: #c57105;
+}
+
+.kontakt-image{
+	text-align: center
+}
+
+.kontakt-image img{
+	margin: 30px 0;
+}
+
+.kontakt-image span{
+	color: #949292;
+	font-size: 16px; 
+}
+
+.kontakt-image img{
+	/*width: 80%;
+	height: auto; */
+}
+
+.kontakt-image span a:hover{
+	color: #949292;
+	font-size: 16px; 
+	text-decoration: none
+	}
+	
+.faq p{
+	text-align: left
+}
+
+
+.list{
+	list-style: none;
+	padding-left: 15px;
+}
+
+.radio-box {
+	margin: 0 auto;
+color: white;
+margin-top: 25px;
+margin-bottom: 15px;
+margin-left: 15px;
+}
+.radio-box p {
+	color: #322306;
+}
+
+ul.list label{
+	font-weight: normal;
+	color: #322306
+}
+ul.list li span {
+	font-size: 12px;
+	font-weight: 200;
+	margin-left: 5px;
+	color: #656565;
+}
+
+/* Effect 5: same word slide in */
+.cl-effect-5 a {
+	overflow: hidden;	
+}
+
+.cl-effect-5 a span {
+	position: relative;
+	display: inline-block;
+	-webkit-transition: -webkit-transform 0.3s;
+	-moz-transition: -moz-transform 0.3s;
+	transition: transform 0.3s;
+}
+
+.cl-effect-5 a span::before {
+	position: absolute;
+	top: 100%;
+	content: attr(data-hover);
+	font-weight: 600;
+	-webkit-transform: translate3d(0,0,0);
+	-moz-transform: translate3d(0,0,0);
+	transform: translate3d(0,0,0);
+
+}
+
+.cl-effect-5 a:hover span,
+.cl-effect-5 a:focus span {
+	-webkit-transform: translateY(-100%);
+	-moz-transform: translateY(-100%);
+	transform: translateY(-100%);
+}
+/*--------------------------------validacia poli-----------------------------------*/
+.numberInputValidation{
+	color:red;
+}
+.buy-bitcoin-notvalid,.sell-classic-card-notvalid,.sell-online-card-notvalid{
+	display:none;
+}
+
+.sell-online-card-notvalid.buy-invalid, .buy-bitcoin-notvalid.buy-invalid{
+	margin: 10px auto 0px auto !important;
+	color: red;
+	text-align: center;
+	font-size: 14px
+}
+
+.account-info{
+	padding: 9px;
+	font-size: 12px;
+}
+
+
+
+.trustpay-icon{
+	margin-left: 25px;
+	margin-top: -3px;
+}
+
+.baner{
+	text-align: center;
+	margin-bottom: -27px;
+}
+
+.vprevadzke.nie{
+visibility: none;
+
+}
+
+.vprevadzke.ano {
+	display: inline-block;
+	/* right: 50% !important; */
+	margin: 0 auto;
+	width: auto;
+	/* position: absolute; */
+	background-color: #fa0000;
+	color: white;
+	font-weight: 400;
+	font-size: 16px;
+	text-align: center;
+	border-radius: 0px 0px 8px 8px;
+	-webkit-border-radius: 0px 0px 8px 8px;
+	-moz-border-radius: 0px 0px 8px 8px;
+	padding: 2px 10px 3px 10px;
+	box-shadow: 1px 2px 6px 0px rgba(0, 0, 0, 0.23);
+}
+
+.adresaZKtorejSaPosiela .rovnasa{
+	margin-top: -15px
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Large desktop */
+@media (min-width: 1200px) { 
+.header .nav.nav-pills {
+	position: absolute;
+	left: 50%;
+	margin-left: -128px;
+	}
+}
+ 
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 990px) and (max-width: 1199px) { 
+.header .nav.nav-pills {
+	position: absolute;
+	left: 50%;
+	margin-left: -128px;
+	}
+	
+.piktogram img{
+	width: 80%;
+	height: auto
+}
+	
+} 
+ 
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 991px) { 
+.header .nav.nav-pills {
+	position: absolute;
+	left: 50%;
+	margin-left: -128px;
+	}
+	
+.secondStep .formular-2-step input, .thirdStep .formular-2-step input, .cisloUctuInput, .adresaZKtorejSaPosielaInput, .{
+	width: 100%;
+}
+	
+.main-content-wrap{
+	background: #e9a920;
+	}
+	
+	
+	
+.whiteline {
+	display: none
+}
+
+.secondStep .navigation .button-submit, .thirdStep .navigation .button-submit,{
+	width: 220px;
+	text-align: center
+}
+
+.piktogram.center {
+	border: none;
+}
+
+.stred-logo{
+	height: 4px !important;
+	background-color: white;
+	clear: both
+}
+
+.stred-wrap {
+	position: absolute;
+	background: white;
+	width: 1120%;
+	height: 100%;
+	margin-left: -20%;
+}
+
+.stred-logo img{
+	display: none
+}
+
+.fancybrand {
+	font-size: 11px;
+	margin-top: 19px;
+	text-align: center;
+	margin-left: 10%;
+	clear: both;
+	margin-right: 35%;
+}
+
+.copyright {
+	margin-left: 17%;
+}
+
+.footer-logos {
+text-align: center;
+padding-top: 20px !important;
+clear: both;
+float: none;
+}
+
+
+span.account-info {
+margin-left: 192px;
+margin-top: -23px;
+margin-bottom: 20px;
+}
+
+
+
+	
+}
+ 
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) { 
+.header .nav.nav-pills {
+	position: static;
+	width: 100%
+}
+	
+.main-content-wrap{
+	background: #e9a920;
+	}
+	
+.whiteline {
+	display: none
+}
+
+.secondStep .formular-2-step input, .thirdStep .formular-2-step input {
+	width: 100% !important;
+
+}
+
+
+.stred-logo{
+	height: 4px !important;
+	background-color: white;
+	clear: both;
+	margin-top: -4px
+}
+
+.stred-wrap {
+	position: absolute;
+	background: white;
+	width: 1120%;
+	height: 100%;
+	margin-left: -20%;
+}
+
+.stred-logo img{
+	display: none
+}
+
+.fancybrand {
+font-size: 11px;
+margin-top: 15px;
+margin-left: 10%;
+clear: both;
+text-align: center;
+width: 100%;
+}
+
+.copyright {
+width: 100%;
+text-align: center;
+}
+
+.nav-pills.footer {
+width: 358px;
+text-align: center;
+clear: both;
+display: block;
+margin: 0 auto;
+float: none !important;
+}
+
+.header .nav-pills{
+	float: right !important
+}
+
+.currency-chart {
+margin-top: 20px;
+margin-left: -88px;
+float: left !important;
+clear: both;
+left: 50%;
+position: relative;
+}
+
+.currency-chart {
+margin-top: 20px;
+margin-left: 0px !important;
+float: none !important;
+clear: both;
+left: 0px;
+right: 0px;
+position: relative;
+width: 100%;
+text-align: center;
+}
+
+available-info {
+padding: 0px -1px 4px 0px;
+}
+.piktogram.center {
+	border: none;
+}
+
+.header .navbar {
+width: 100%;
+margin-top: -50px;
+}
+
+.nav-pills > li {
+float: none;
+}
+
+.currency-chart {
+margin-left: -104px;
+margin-top: 0px
+}
+
+.navbar-toggle {
+margin-right: 0px;
+}
+
+.footer-containter .nav-pills > li {
+display: inline-block
+}
+
+.footer-logos{
+	text-align: center;
+	padding-top: 20px;
+	clear: both;
+	float: none;
+}
+
+.nav-pills.footer {
+width: 100%;
+text-align: center !important;
+clear: both;
+display: block;
+float: left !important;
+text-align: center;
+}
+
+.tabulka-mien-wrapper {
+width: 100%;
+}
+
+h1.logo.pull-left {
+position: relative;
+z-index: 999999;
+}
+
+.secondStep .rovnasa {
+width: auto;
+}
+
+.account-info {
+padding: 9px;
+font-size: 12px;
+/* padding-top: 14px; */
+margin-bottom: -11px !important;
+padding-bottom: 0px !important;
+position: relative;
+/* display: block !important; */
+margin-top: 7px;
+}
+
+.zadavajte{
+margin-top: -24px;
+margin-bottom: 20px !important;
+
+}
+
+.visible-xs.cislo-uctu{
+	font-size: 10px
+}
+
+.adresaZKtorejSaPosiela .rovnasa{
+	margin-top: 0px
+}
+	
+}
+ 
+/* Landscape phones and down */
+@media (max-width: 480px) { 
+.header h1 {
+
+width: 100%;
+text-align: center;
+}
+
+.header .nav-pills {
+margin-right: 0;
+width: 100%;
+}
+
+.piktogram.center {
+	border: none;
+}
+
+.secondStep .formular-2-step input, .thirdStep .formular-2-step input {
+	width: 100%;
+
+}
+
+.cisloPenazenkyInput, .lastNameInput, .firstNameInput, .emailInput {
+width: 100% !important;
+}
+
+.tabulka-mien-wrapper, .header h1 {
+width: 100%;
+}
+
+.logo{
+	float: left;
+	width: 125px !important;
+	height: auto
+}
+
+.logo embed{
+	width: 125px;
+	height: auto
+}
+
+
+.tabulka-mien-wrapper{
+	width: 100%
+}
+
+.langs {
+	position: absolute;
+	right: 54px;
+	top: 3px;
+	z-index: 9999;
+}
+.langs img{
+	margin-left: 5px
+}
+
+.header {
+	margin-top: 23px;
+}
+
+.vprevadzke.ano {
+	display: inline-block;
+	background-color: #fa0000;
+	color: white;
+	text-transform: uppercase;
+	font-weight: 400;
+	font-size: 10px;
+	text-align: center;
+	-moz-border-radius: 0px 0px 8px 8px;
+	padding: 1px 8px 1px 8px;
+	box-shadow: 1px 2px 6px 0px rgba(0, 0, 0, 0.23);
+}
+
+.baner {
+text-align: center;
+margin-bottom: -15px;
+margin-top: -3px;
+}
+
+h1.logo.pull-left {
+position: relative;
+z-index: 999999;
+}
+
+.exchange-symbol {
+padding-top: 20px;
+}
+
+.inputs.currency {
+margin-top: 20px;
+}
+
+.text-input {
+	width: 46%
+}
+
+.inputs.currency {
+	text-align: center;
+	width: 100%;
+	margin-left: 0px;
+	left: 0px;
+	position: relative;
+	display: block;
+	float: left;
+	text-align: center;
+}
+
+.info-text p {
+font-size: 16px;
+
+}
+
+.footer-containter .nav-pills > li {
+display: inline-block
+}
+
+.footer-logos{
+	text-align: center;
+	padding-top: 20px;
+	clear: both
+}
+
+.nav-pills.footer {
+width: 100%;
+text-align: center !important;
+clear: both;
+display: block;
+float: left !important;
+text-align: center;
+}	
+
+.exchange-symbol img {
+	width: 100px;
+	height: auto
+}
+
+.available-info {
+font-size: 16px;
+width: 100%
+}
+
+#panelCaller{
+	display: none
+}
+
+.okamzite-btn{
+	display: block;
+background: #373737;
+border-color: transparent;
+width: 100%;
+margin-top: 20px;
+clear: both;
+float: left;
+font-size: 13px;
+}
+
+.okamzite-btn:hover, .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary{
+background-color: #616161;
+border-color: transparent;
+}
+
+.header td{
+	width: 30%;
+}
+
+body.modal-open, .modal-open .navbar-fixed-top, .modal-open .navbar-fixed-bottom {
+margin-right: 0px;
+}
+
+.okamzite-btn img{
+	width: 15px;
+height: auto;
+margin-right: 10px
+}
+
+.emailInputValidation, .numberInputValidation, .adresaZKtorejSaPosielaValidation, .menoNazovSepaValidation, .ulicaSepaValidation, .mestoSepaValidation, .smerovacieCisloSepaValidation, .ibanSepaValidation, .swiftBicSepaValidation {
+margin-left: 5px;
+margin-top: 5px
+}
+
+.account-info {
+padding: 5px;
+}
+
+.secondStep .formular-2-step input, .thirdStep .formular-2-step input, .select-country {
+margin-bottom: 0px;
+width: 100%
+}
+
+
+.navigation input {
+font-size: 12px !important;
+}
+
+.secondStep .rovnasa {
+width: auto;
+}
+
+span.account-info.pull-left.visible-xs {
+float: left;
+margin-top: 13px;
+}
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

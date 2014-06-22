@@ -1,0 +1,1 @@
+<a href="{$add}">Create a new design</a>

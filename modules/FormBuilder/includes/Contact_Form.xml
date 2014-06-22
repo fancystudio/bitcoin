@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form id="1"
+	alias="contact">
+		<form_name><![CDATA[Contact Form]]></form_name>
+		<attribute key="form_template"><![CDATA[{* DEFAULT FORM LAYOUT / pure CSS *}
+{$fb_form_header}
+{if $fb_form_done == 1}
+	{* This first section is for displaying submission errors *}
+	{if isset($fb_submission_error) && $fb_submission_error}
+		<div class="error_message">{$fb_submission_error}</div>
+		{if isset($fb_show_submission_errors) && $fb_show_submission_errors}
+			<div class="error">
+			<ul>
+			{foreach from=$fb_submission_error_list item=thisErr}
+				<li>{$thisErr}</li>
+			{/foreach}
+			</ul>
+		</div>
+		{/if}
+	{/if}
+{else}
+	{* this section is for displaying the form *}
+	{* we start with validation errors *}
+	{if isset($fb_form_has_validation_errors) && $fb_form_has_validation_errors}
+		<div class="error_message">
+		<ul>
+		{foreach from=$fb_form_validation_errors item=thisErr}
+			<li>{$thisErr}</li>
+		{/foreach}
+		</ul>
+		</div>
+	{/if}
+	{if isset($captcha_error) && $captcha_error}
+		<div class="error_message">{$captcha_error}</div>
+	{/if}
+
+	{* and now the form itself *}
+	{$fb_form_start}
+	{$fb_hidden}
+	<div{if $css_class != ''} class="{$css_class}"{/if}>
+	{if $total_pages gt 1}<span>{$title_page_x_of_y}</span>{/if}
+	{foreach from=$fields item=entry}
+		{if $entry->display == 1}
+        	{strip}
+         	{if $entry->needs_div == 1}
+            	<div
+            	{if $entry->required == 1 || $entry->css_class != '' || $entry->valid == 0} class="
+              		{if $entry->required == 1}required{/if}
+              		{if $entry->css_class != ''} {$entry->css_class}{/if}
+                    {if $entry->valid == 0} fb_invalid{/if}
+              		"
+            	{/if}
+            	>
+         	{/if}
+         	{if $entry->hide_name == 0}
+            	<label{if $entry->multiple_parts != 1} for="{$entry->input_id}"{/if}>{$entry->name}
+            	{if $entry->required_symbol != ''}
+               		{$entry->required_symbol}
+            	{/if}
+            	</label>
+         	{/if}
+         	{if $entry->multiple_parts == 1}
+            	{section name=numloop loop=$entry->input}
+               		{if $entry->label_parts == 1}
+               			<div>{$entry->input[numloop]->input}&nbsp;{$entry->input[numloop]->name}</div>
+               		{else}
+               			{$entry->input[numloop]->input}
+               		{/if}
+               		{if isset($entry->input[numloop]->op) && $entry->input[numloop]->op}{$entry->input[numloop]->op}{/if}
+            	{/section}
+         	{else}
+            	{if $entry->smarty_eval == '1'}{eval var=$entry->input}{else}{$entry->input}{/if}
+         	{/if}
+         	{if $entry->valid == 0} &lt;--- {$entry->error}{/if}
+         	{if $entry->needs_div == 1}
+            	</div>
+         	{/if}
+         	{/strip}
+     	{/if}
+	{/foreach}
+	{if $has_captcha == 1}
+		<div class="captcha">{$graphic_captcha}{$title_captcha}<br />{$input_captcha}</div>
+	{/if}
+	<div class="submit">{$prev}{$submit}</div>
+	</div>
+	{$fb_form_end}
+{/if}
+{$fb_form_footer}]]></attribute>
+		<attribute key="submit_action"><![CDATA[text]]></attribute>
+		<attribute key="css_class"><![CDATA[contactform]]></attribute>
+		<attribute key="list_delimiter"><![CDATA[,]]></attribute>
+		<attribute key="inline"><![CDATA[0]]></attribute>
+		<attribute key="submit_javascript"><![CDATA[]]></attribute>
+		<attribute key="next_button_text"><![CDATA[Continue...]]></attribute>
+		<attribute key="title_user_captcha"><![CDATA[Please confirm that you are not a script by entering the letters from the image.]]></attribute>
+		<attribute key="use_captcha"><![CDATA[]]></attribute>
+		<attribute key="captcha_wrong"><![CDATA[Captcha was not correct.]]></attribute>
+		<attribute key="prev_button_text"><![CDATA[Back...]]></attribute>
+		<attribute key="required_field_symbol"><![CDATA[*]]></attribute>
+		<attribute key="unspecified"><![CDATA[[unspecified]]]></attribute>
+		<attribute key="submit_button_text"><![CDATA[Submit Form]]></attribute>
+		<attribute key="input_button_safety"><![CDATA[0]]></attribute>
+		<attribute key="redirect_page"><![CDATA[-1]]></attribute>
+		<attribute key="submit_response"><![CDATA[<p>Thank you, <strong>{$your_name}</strong>.</p>
+<p>Your submission has been successful. You may wish to print this page as a reference.</p>
+<h3>Contact Details</h3>
+<p>
+<strong>Name</strong>: {$your_name}<br />
+<strong>Email</strong>: <a href="mailto:{$your_email_address}">{$your_email_address}</a><br />
+</p>
+<h3>Feedback Details</h3>
+<p>
+<strong>Subject</strong>: {$subject}<br />
+<strong>Comments</strong>:<br />
+{$message}
+</p> 
+<h4>Other information</h4>
+<p>
+<strong>Date of Submission</strong>: {$sub_date}<br />
+<strong>Form Name</strong>: {$sub_form_name}<br />
+<strong>URL of page containing form</strong>: {$sub_url}<br />
+<strong>Domain</strong>: {$sub_host}<br />
+<strong>Your IP address</strong>: {$sub_source_ip}
+</p> ]]></attribute>
+	<field id="3"
+		type="FieldsetStart"
+		validation_type=""
+		order_by="1"
+		required="0"
+		hide_label="0"
+		alias="">
+			<field_name><![CDATA[Contact Fieldset]]></field_name>
+			<options>
+			<option name="legend"><![CDATA[Contact]]></option>
+			<option name="css_class"><![CDATA[]]></option>
+			<value></value>
+			</options>
+</field>
+	<field id="4"
+		type="FromEmailNameField"
+		validation_type=""
+		order_by="2"
+		required="0"
+		hide_label="0"
+		alias="">
+			<field_name><![CDATA[Your Name]]></field_name>
+			<options>
+			<option name="css_class"><![CDATA[]]></option>
+			<value></value>
+			</options>
+</field>
+	<field id="43"
+		type="DispositionFromEmailAddressField"
+		validation_type="none"
+		order_by="3"
+		required="0"
+		hide_label="0"
+		alias="">
+			<field_name><![CDATA[Your Email Address]]></field_name>
+			<options>
+			<option name="email_subject"><![CDATA[Email from Site]]></option>
+			<option name="email_from_name"><![CDATA[Form Builder]]></option>
+			<option name="send_user_copy"><![CDATA[c]]></option>
+			<option name="send_user_label"><![CDATA[Send me a copy of form]]></option>
+			<option name="field_alias"><![CDATA[]]></option>
+			<option name="javascript"><![CDATA[]]></option>
+			<option name="html_email"><![CDATA[0]]></option>
+			<option name="email_template"><![CDATA[FormBuilder Submission
+Form Name: {$sub_form_name}
+Date of Submission: {$sub_date}
+Your server: {$sub_host}
+IP address of person using form: {$sub_source_ip}
+URL of page containing form: {$sub_url}
+FormBuilder version: {$fb_version}
+Tab Character: {$TAB}
+->
+-------------------------------------------------
+Your Name: {$fld_4}
+Your Email Address: {$fld_43}
+Email Again: {$fld_42}
+Subject: {$fld_6}
+Message: {$foo}
+]]></option>
+			<option name="email_encoding"><![CDATA[utf-8]]></option>
+			<value></value>
+			</options>
+</field>
+	<field id="42"
+		type="FromEmailAddressAgainField"
+		validation_type=""
+		order_by="4"
+		required="0"
+		hide_label="0"
+		alias="">
+			<field_name><![CDATA[Email Again]]></field_name>
+			<options>
+			<option name="field_to_validate"><![CDATA[Your Email Address]]></option>
+			<option name="field_alias"><![CDATA[]]></option>
+			<option name="css_class"><![CDATA[]]></option>
+			<value></value>
+			</options>
+</field>
+	<field id="6"
+		type="FromEmailSubjectField"
+		validation_type=""
+		order_by="5"
+		required="0"
+		hide_label="0"
+		alias="">
+			<field_name><![CDATA[Subject]]></field_name>
+			<options>
+			<option name="css_class"><![CDATA[]]></option>
+			<value></value>
+			</options>
+</field>
+	<field id="7"
+		type="TextAreaField"
+		validation_type=""
+		order_by="6"
+		required="1"
+		hide_label="0"
+		alias="">
+			<field_name><![CDATA[Message]]></field_name>
+			<options>
+			<option name="rows"><![CDATA[5]]></option>
+			<option name="cols"><![CDATA[60]]></option>
+			<option name="css_class"><![CDATA[]]></option>
+			<option name="field_alias"><![CDATA[message]]></option>
+			<option name="default"><![CDATA[Enter Your Message Here]]></option>
+			<option name="clear_default"><![CDATA[1]]></option>
+			<value></value>
+			</options>
+</field>
+	<field id="104"
+		type="DispositionEmail"
+		validation_type=""
+		order_by="7"
+		required="0"
+		hide_label="0"
+		alias="">
+			<field_name><![CDATA[Send To]]></field_name>
+			<options>
+			<option name="email_subject"><![CDATA[Contact Form Submission]]></option>
+			<option name="email_from_name"><![CDATA[Form Builder]]></option>
+			<option name="email_from_address"><![CDATA[website@yourdomain.com]]></option>
+			<option name="destination_address"><![CDATA[you@yourdomain.com]]></option>
+			<option name="field_alias"><![CDATA[]]></option>
+			<option name="html_email"><![CDATA[1]]></option>
+			<option name="email_template"><![CDATA[]]></option>
+			<option name="email_encoding"><![CDATA[utf-8]]></option>
+			<value></value>
+			</options>
+</field>
+	<field id="105"
+		type="FieldsetEnd"
+		validation_type=""
+		order_by="8"
+		required="0"
+		hide_label="0"
+		alias="">
+			<field_name><![CDATA[fieldset end]]></field_name>
+			<options>
+			<option name="field_alias"><![CDATA[]]></option>
+			<option name="css_class"><![CDATA[]]></option>
+			<value></value>
+			</options>
+</field>
+</form>
