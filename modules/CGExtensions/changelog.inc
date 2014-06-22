@@ -412,6 +412,8 @@
     <li>Adds the cge_utils::get_param() method</li>
     <li>Adds the CGGetPreference method to the module api.</li>
     <li>Adds the get_uid_emails convenience method.</li>
+    <li>Improvements to {cge_textarea}</li>
+    <li>Improvements to {cg_image}</li>
   </ul>
 </li>
 </ul>

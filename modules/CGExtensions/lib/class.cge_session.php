@@ -54,7 +54,12 @@ class cge_session
     }
   }
 
-  public function put($key,$value) 
+  public function set($key,$value)
+  {
+      $this->put($key,$value);
+  }
+
+  public function put($key,$value)
   {
     if( !isset($_SESSION[$this->_keyname]) )  $_SESSION[$this->_keyname] = array();
     $_SESSION[$this->_keyname][$key] = $value;

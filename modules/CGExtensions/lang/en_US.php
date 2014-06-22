@@ -290,6 +290,7 @@ $lang['watermarkerror_1006'] = "Other watermark error";
 $lang['watermarking'] = "Watermarking";
 $lang['watermark_alignment'] = "Align all watermarks in this relative position";
 $lang['watermark_text'] = "Watermark Text";
+$lang['whatsthis'] = 'What is this?';
 
 ## Y
 $lang['yes'] = "Yes";

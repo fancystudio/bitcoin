@@ -199,7 +199,8 @@ class cg_fileupload
 
   public function check_upload_attempted($name,$subfield = false)
   {
-    $fldname = $this->_prefix.$name;
+      $fldname = $this->_prefix.$name;
+
     if( !isset($this->_files) || !isset($this->_files[$fldname]) ) {
       return FALSE;
     }
@@ -221,41 +222,41 @@ class cg_fileupload
 
   public function check_upload($name,$subfield = false,$checkdir = TRUE)
   {
-    $fldname = $this->_prefix.$name;
-    if( !isset($this->_files) || !isset($this->_files[$fldname]) ) {
-      $this->_errno = self::NOFILE;
-      return false;
-    }
+      $fldname = $this->_prefix.$name;
+      if( !isset($this->_files) || !isset($this->_files[$fldname]) ) {
+          $this->_errno = self::NOFILE;
+          return false;
+      }
 
-    $file = '';
-    if( empty($subfield) ) {
-      if( !is_array($this->_files[$fldname]) || !isset($this->_files[$fldname]['name']) ||
-	  empty($this->_files[$fldname]['name']) ) {
-	// there's nothing to handle
-	$this->_errno = self::NOFILE;
-	return false;
+      $file = '';
+      if( empty($subfield) ) {
+          if( !is_array($this->_files[$fldname]) || !isset($this->_files[$fldname]['name']) ||
+              empty($this->_files[$fldname]['name']) ) {
+              // there's nothing to handle
+              $this->_errno = self::NOFILE;
+              return false;
+          }
+          else {
+              $file = $this->_files[$fldname];
+          }
       }
       else {
-	$file = $this->_files[$fldname];
-      }
-    }
-    else {
-      // the files are an array, so each element is an array
-      // we gotta build $file from the $_FILES one step at a time
-      $tmp = array();
-      foreach( $this->_files[$fldname] as $key => $value ) {
-	if( isset($value[$subfield]) ) {
-	  $tmp[$key] = $value[$subfield];
-	}
-      }
-      $file = $tmp;
+          // the files are an array, so each element is an array
+          // we gotta build $file from the $_FILES one step at a time
+          $tmp = array();
+          foreach( $this->_files[$fldname] as $key => $value ) {
+              if( isset($value[$subfield]) ) {
+                  $tmp[$key] = $value[$subfield];
+              }
+          }
+          $file = $tmp;
 
-      if( !is_array($file) || 
-	  !isset($file['name']) || 
-	  empty($file['name']) ) {
-	$this->_errno = self::NOFILE;
-	return false;
-      }
+          if( !is_array($file) ||
+              !isset($file['name']) ||
+              empty($file['name']) ) {
+              $this->_errno = self::NOFILE;
+              return false;
+          }
     }
 
     // Normalize the file variables
@@ -268,52 +269,52 @@ class cg_fileupload
     $extension = strrchr($file['name'],".");
 
     // Check the file size
-    if( ($this->_maxfilesize > 0) && 
-	($file['size'] > $this->_maxfilesize) ) {
-      $this->_errno = self::FILESIZE;
-      return false;
+    if( ($this->_maxfilesize > 0) &&
+        ($file['size'] > $this->_maxfilesize) ) {
+        $this->_errno = self::FILESIZE;
+        return false;
     }
 
     // Check the file extension
     if( !$this->is_accepted_file($file['name']) ) {
-      $this->_errno = self::FILETYPE;
-      return false;
+        $this->_errno = self::FILETYPE;
+        return false;
     }
 
     if( $checkdir ) {
-      // check the destination directory
-      if( !is_dir($this->_destdir) ) {
-	$this->_errno = self::BADDESTDIR;
-	return false;
-      }
-	
-      if( !is_writable($this->_destdir) ) {
-	$this->_errno = self::BADPERMS;
-	return false;
-      }
+        // check the destination directory
+        if( !is_dir($this->_destdir) ) {
+            $this->_errno = self::BADDESTDIR;
+            return false;
+        }
+
+        if( !is_writable($this->_destdir) ) {
+            $this->_errno = self::BADPERMS;
+            return false;
+        }
     }
 
     $newname = $file['name'];
     if( empty($destfilename) && !empty($this->_destname) ) {
-      $destfilename = $this->_destname;
+        $destfilename = $this->_destname;
     }
     if( !empty($destfilename) ) {
-      // put the extensionof the input file on the new destination name.
-      // this prevents a .jpg from being named a .gif or something.
-      $destfilename = basename($destfilename);
-      $tmp = substr($destfilename,0,strlen($file['name'])-strlen($extension));
-      $newname = $tmp.$extension;
+        // put the extensionof the input file on the new destination name.
+        // this prevents a .jpg from being named a .gif or something.
+        $destfilename = basename($destfilename);
+        $tmp = substr($destfilename,0,strlen($file['name'])-strlen($extension));
+        $newname = $tmp.$extension;
     }
     $destname = cms_join_path($this->_destdir,$newname);
     if( file_exists($destname) ) {
-      if( !$this->_allow_overwrite ) {
-	$this->_errno = self::FILEEXISTS;
-	return false;
-      }
-      else if( !is_writable($destname) ) {
-	$this->_errno = self::BADPERMS;
-	return false;
-      }
+        if( !$this->_allow_overwrite ) {
+            $this->_errno = self::FILEEXISTS;
+            return false;
+        }
+        else if( !is_writable($destname) ) {
+            $this->_errno = self::BADPERMS;
+            return false;
+        }
     }
 
     return true;
@@ -420,7 +421,6 @@ class cg_fileupload
     $srcname = $tmp;
 
     // And Attempt the copy
-    $this->_destname = $destname;
     $res = @copy( $srcname, $destname );
     if( !$res ) {
       $this->_errno = self::MOVEFAILED;

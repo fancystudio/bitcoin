@@ -60,94 +60,99 @@ class CGExtensions extends CMSModule
    ---------------------------------------------------------*/
   public function __construct()
   {
-    $class = get_class($this);
-    if( !defined('MOD_'.strtoupper($class)) ) define('MOD_'.strtoupper($class),$class);
+      spl_autoload_register(array($this,'autoload'));
+      parent::__construct();
 
-    spl_autoload_register(array($this,'autoload'));
-    parent::__construct();
+      global $CMS_INSTALL_PAGE, $CMS_PHAR_INSTALL;
+      if( isset($CMS_INSTALL_PAGE) || isset($CMS_PHAR_INSTALL) ) return;
 
-    // setup caching
-    if( $class == 'CGExtensions' && !is_object(cms_cache_handler::get_instance()->get_driver()) ) {
-      $lifetime = (int)$this->GetPreference('cache_lifetime',300);
-      $filelock = (int)$this->GetPreference('cache_filelock',1);
-      $autoclean = (int)$this->GetPreference('cache_autoclean',1);
-      if( $autoclean ) {
-	// autoclean is enabled... but we don't want to search through the directory for files to delete
-	// on each request... so we just do that once per interval.
-	$tmp = $this->GetPreference('cache_autoclean_last',0);
-	if( (time() - $tmp) < $lifetime ) {
-	  $autoclean = 0;
-	}
-	else {
-	  $autoclean = 1;
-	  $this->SetPreference('cache_autoclean_last',time());
-	}
+      $class = get_class($this);
+      if( !defined('MOD_'.strtoupper($class)) ) define('MOD_'.strtoupper($class),$class);
+
+      // setup caching
+      if( $class == 'CGExtensions' && !is_object(cms_cache_handler::get_instance()->get_driver()) ) {
+          $lifetime = (int)$this->GetPreference('cache_lifetime',300);
+          $filelock = (int)$this->GetPreference('cache_filelock',1);
+          $autoclean = (int)$this->GetPreference('cache_autoclean',1);
+          if( $autoclean ) {
+              // autoclean is enabled... but we don't want to search through the directory for files to delete
+              // on each request... so we just do that once per interval.
+              $tmp = $this->GetPreference('cache_autoclean_last',0);
+              if( (time() - $tmp) < $lifetime ) {
+                  $autoclean = 0;
+              }
+              else {
+                  $autoclean = 1;
+                  $this->SetPreference('cache_autoclean_last',time());
+              }
+          }
+          $driver = new cms_filecache_driver(array('cache_dir'=>TMP_CACHE_LOCATION,'lifetime'=>$lifetime,'locking'=>$filelock,
+                                                   'auto_cleaning'=>$autoclean));
+          cms_cache_handler::get_instance()->set_driver($driver);
       }
-      $driver = new cms_filecache_driver(array('cache_dir'=>TMP_CACHE_LOCATION,'lifetime'=>$lifetime,'locking'=>$filelock,
-					       'auto_cleaning'=>$autoclean));
-      cms_cache_handler::get_instance()->set_driver($driver);
-    }
 
-    if( self::$_initialized ) return;
-    self::$_initialized = TRUE;
+      if( self::$_initialized ) return;
+      self::$_initialized = TRUE;
 
-    $this->_obj = false;
-    $this->_actionid = '';
+      $this->_obj = false;
+      $this->_actionid = '';
 
-    $smarty = cmsms()->GetSmarty();
-    $smarty->register_function('cge_yesno_options','cge_smarty_plugins::smarty_function_cge_yesno_options');
-    $smarty->register_function('cge_have_module', array('cge_smarty_plugins','smarty_function_have_module'));
+      $smarty = cmsms()->GetSmarty();
+      if( !$smarty ) return;
 
-    $smarty->register_block('cgerror', array('cge_smarty_plugins','blockDisplayError'));
-    $smarty->register_block('jsmin', array('cge_smarty_plugins','jsmin'));
+      $smarty->register_function('cge_yesno_options','cge_smarty_plugins::smarty_function_cge_yesno_options');
+      $smarty->register_function('cge_have_module', array('cge_smarty_plugins','smarty_function_have_module'));
 
-    $smarty->register_function('cge_cached_url',array('cge_smarty_plugins','cge_cached_url'));
-    $smarty->register_function('cgimage',array('cge_smarty_plugins','smarty_function_cgimage'));
-    $smarty->register_function('cge_helptag',array('cge_smarty_plugins','smarty_function_helptag'));
-    $smarty->register_function('cge_helphandler',array('cge_smarty_plugins','smarty_function_helphandler'));
-    $smarty->register_function('cge_helpcontent',array('cge_smarty_plugins','smarty_function_helpcontent'));
-    $smarty->register_function('cge_state_options', array('cge_smarty_plugins','smarty_function_cge_state_options'));
-    $smarty->register_function('cge_country_options', array('cge_smarty_plugins','smarty_function_cge_country_options'));
-    $smarty->register_function('cge_textarea', array('cge_smarty_plugins','smarty_function_cge_textarea'));
-    $smarty->register_function('get_current_url', array('cge_smarty_plugins','smarty_function_get_current_url'));
-    $smarty->register_function('cge_str_to_assoc',array('cge_smarty_plugins','smarty_function_str_to_assoc'));
-    $smarty->register_modifier('rfc_date', array('cge_smarty_plugins','smarty_modifier_rfc_date'));
-    $smarty->register_modifier('time_fmt', array('cge_smarty_plugins','smarty_modifier_time_fmt'));
-    $smarty->register_modifier('cge_entity_decode', array('cge_smarty_plugins','smarty_modifier_cge_entity_decode'));
-    $smarty->register_compiler_function('cge_cache',array('cge_smarty_plugins','cache_start'));
-    $smarty->register_compiler_function('cge_cacheclose',array('cge_smarty_plugins','cache_end'));
+      $smarty->register_block('cgerror', array('cge_smarty_plugins','blockDisplayError'));
+      $smarty->register_block('jsmin', array('cge_smarty_plugins','jsmin'));
 
-    $smarty->register_function('cge_module_hint',array('cge_smarty_plugins','cge_module_hint'));
-    $smarty->register_function('cge_file_list',array('cge_smarty_plugins','cge_file_list'));
-    $smarty->register_function('cge_image_list',array('cge_smarty_plugins','cge_image_list'));
-    $smarty->register_function('cge_array_set',array('cge_smarty_plugins','cge_array_set'));
-    $smarty->register_function('cge_array_erase',array('cge_smarty_plugins','cge_array_erase'));
-    $smarty->register_function('cge_array_get',array('cge_smarty_plugins','cge_array_get'));
-    $smarty->register_function('cge_array_getall',array('cge_smarty_plugins','cge_array_getall'));
-    $smarty->register_function('cge_admin_error',array('cge_smarty_plugins','cge_admin_error'));
-    $smarty->register_function('cge_wysiwyg',array('cge_smarty_plugins','cge_wysiwyg'));
-    $smarty->register_modifier('cge_createurl',array('cge_smarty_plugins','smarty_modifier_createurl'));
-    $smarty->register_function('cge_setlist',array('cge_smarty_plugins','cge_setlist'));
-    $smarty->register_function('cge_unsetlist',array('cge_smarty_plugins','cge_unsetlist'));
-    $smarty->register_function('cge_message',array('cge_smarty_plugins','cge_message'));
+      $smarty->register_function('cge_cached_url',array('cge_smarty_plugins','cge_cached_url'));
+      $smarty->register_function('cgimage',array('cge_smarty_plugins','smarty_function_cgimage'));
+      $smarty->register_function('cge_helptag',array('cge_smarty_plugins','smarty_function_helptag'));
+      $smarty->register_function('cge_helphandler',array('cge_smarty_plugins','smarty_function_helphandler'));
+      $smarty->register_function('cge_helpcontent',array('cge_smarty_plugins','smarty_function_helpcontent'));
+      $smarty->register_function('cge_state_options', array('cge_smarty_plugins','smarty_function_cge_state_options'));
+      $smarty->register_function('cge_country_options', array('cge_smarty_plugins','smarty_function_cge_country_options'));
+      $smarty->register_function('cge_textarea', array('cge_smarty_plugins','smarty_function_cge_textarea'));
+      $smarty->register_function('get_current_url', array('cge_smarty_plugins','smarty_function_get_current_url'));
+      $smarty->register_function('cge_str_to_assoc',array('cge_smarty_plugins','smarty_function_str_to_assoc'));
+      $smarty->register_modifier('rfc_date', array('cge_smarty_plugins','smarty_modifier_rfc_date'));
+      $smarty->register_modifier('time_fmt', array('cge_smarty_plugins','smarty_modifier_time_fmt'));
+      $smarty->register_modifier('cge_entity_decode', array('cge_smarty_plugins','smarty_modifier_cge_entity_decode'));
+      $smarty->register_compiler_function('cge_cache',array('cge_smarty_plugins','cache_start'));
+      $smarty->register_compiler_function('cge_cacheclose',array('cge_smarty_plugins','cache_end'));
 
-    $smarty->register_function('cge_isbot',array('cge_smarty_plugins','cge_isbot'));
-    $smarty->register_function('cge_is_smartphone',array('cge_smarty_plugins','cge_is_smartphone'));
-    $smarty->register_function('cge_getbrowser',array('cge_smarty_plugins','cge_get_browser'));
-    $smarty->register_function('cge_isie',array('cge_smarty_plugins','cge_isie'));
+      $smarty->register_function('cge_module_hint',array('cge_smarty_plugins','cge_module_hint'));
+      $smarty->register_function('cge_file_list',array('cge_smarty_plugins','cge_file_list'));
+      $smarty->register_function('cge_image_list',array('cge_smarty_plugins','cge_image_list'));
+      $smarty->register_function('cge_array_set',array('cge_smarty_plugins','cge_array_set'));
+      $smarty->register_function('cge_array_erase',array('cge_smarty_plugins','cge_array_erase'));
+      $smarty->register_function('cge_array_get',array('cge_smarty_plugins','cge_array_get'));
+      $smarty->register_function('cge_array_getall',array('cge_smarty_plugins','cge_array_getall'));
+      $smarty->register_function('cge_admin_error',array('cge_smarty_plugins','cge_admin_error'));
+      $smarty->register_function('cge_wysiwyg',array('cge_smarty_plugins','cge_wysiwyg'));
+      $smarty->register_modifier('cge_createurl',array('cge_smarty_plugins','smarty_modifier_createurl'));
+      $smarty->register_function('cge_setlist',array('cge_smarty_plugins','cge_setlist'));
+      $smarty->register_function('cge_unsetlist',array('cge_smarty_plugins','cge_unsetlist'));
+      $smarty->register_function('cge_message',array('cge_smarty_plugins','cge_message'));
 
-    $smarty->register_function('cge_content_type',array('cge_smarty_plugins','cge_content_type'));
-    $smarty->register_function('cge_start_tabs',array('cge_smarty_plugins','cge_start_tabs'));
-    $smarty->register_function('cge_end_tabs',array('cge_smarty_plugins','cge_end_tabs'));
-    $smarty->register_function('cge_tabheader',array('cge_smarty_plugins','cge_tabheader'));
-    $smarty->register_function('cge_tabcontent_start',array('cge_smarty_plugins','cge_tabcontent_start'));
-    $smarty->register_function('cge_tabcontent_end',array('cge_smarty_plugins','cge_tabcontent_end'));
+      $smarty->register_function('cge_isbot',array('cge_smarty_plugins','cge_isbot'));
+      $smarty->register_function('cge_is_smartphone',array('cge_smarty_plugins','cge_is_smartphone'));
+      $smarty->register_function('cge_getbrowser',array('cge_smarty_plugins','cge_get_browser'));
+      $smarty->register_function('cge_isie',array('cge_smarty_plugins','cge_isie'));
 
-    $db = cmsms()->GetDb();
-    if( is_object($db) ) {
-      $query = 'SET @CG_ZEROTIME = NOW() - INTERVAL 150 YEAR,@CG_FUTURETIME = NOW() + INTERVAL 5 YEAR';
-      $db->Execute($query);
-    }
+      $smarty->register_function('cge_content_type',array('cge_smarty_plugins','cge_content_type'));
+      $smarty->register_function('cge_start_tabs',array('cge_smarty_plugins','cge_start_tabs'));
+      $smarty->register_function('cge_end_tabs',array('cge_smarty_plugins','cge_end_tabs'));
+      $smarty->register_function('cge_tabheader',array('cge_smarty_plugins','cge_tabheader'));
+      $smarty->register_function('cge_tabcontent_start',array('cge_smarty_plugins','cge_tabcontent_start'));
+      $smarty->register_function('cge_tabcontent_end',array('cge_smarty_plugins','cge_tabcontent_end'));
+
+      $db = cmsms()->GetDb();
+      if( is_object($db) ) {
+          $query = 'SET @CG_ZEROTIME = NOW() - INTERVAL 150 YEAR,@CG_FUTURETIME = NOW() + INTERVAL 5 YEAR';
+          $db->Execute($query);
+      }
   }
 
 
@@ -157,10 +162,11 @@ class CGExtensions extends CMSModule
 
     // check for classes.
     if( strpos($classname,'\\') !== FALSE ) {
-      $bn = basename(str_replace('\\','/',$classname));
-      $dn = dirname(str_replace('\\','/',$classname));
-      $fn = $this->GetModulePath()."/lib/$dn/class.{$bn}.php";
-      if( file_exists($fn) ) require_once($fn);
+        $bn = basename(str_replace('\\','/',$classname));
+        $dn = dirname(str_replace('\\','/',$classname));
+        $fn = $this->GetModulePath()."/lib/$dn/class.{$bn}.php";
+        if( file_exists($fn) ) require_once($fn);
+        $classname = $bn;
     }
 
     global $CMS_ADMIN_PAGE;
@@ -225,7 +231,7 @@ class CGExtensions extends CMSModule
 
   public function GetName() { return 'CGExtensions'; }
   public function GetFriendlyName() { return $this->Lang('friendlyname'); }
-  public function GetVersion() { return '1.38.8'; }
+  public function GetVersion() { return '1.38.11'; }
   public function GetHelp() { return file_get_contents(__DIR__.'/help.inc'); }
   public function GetAuthor() { return 'calguy1000'; }
   public function GetAuthorEmail() { return 'calguy1000@cmsmadesimple.org'; }
@@ -1012,12 +1018,14 @@ class CGExtensions extends CMSModule
 
   function resolve_alias_or_id($txt,$dflt = null)
   {
-    $txt = trim($txt);
-    $manager = cmsms()->GetHierarchyManager();
-    $node = $manager->find_by_tag('alias',$txt);
-    if( !isset($node) ) $node = $manager->find_by_tag('id',(int)$txt);
-    if( is_object($node) ) return (int)$node->get_tag('id');
-    return $dflt;
+      $txt = trim($txt);
+      if( $txt ) {
+          $manager = cmsms()->GetHierarchyManager();
+          $node = $manager->find_by_tag('alias',$txt);
+          if( !isset($node) ) $node = $manager->find_by_tag('id',(int)$txt);
+          if( is_object($node) ) return (int)$node->get_tag('id');
+      }
+      return $dflt;
   }
 
 

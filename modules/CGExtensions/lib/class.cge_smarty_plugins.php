@@ -666,7 +666,7 @@ final class cge_smarty_plugins
     public static function cge_wysiwyg($params,$smarty)
     {
         if( !isset($params['wysiwyg']) ) $params['wysiwyg'] = 1;
-        return self::cge_textarea($params,$smarty);
+        return self::smarty_function_cge_textarea($params,$smarty);
     }
 
     public static function smarty_modifier_createurl($input,$assume_root = TRUE)

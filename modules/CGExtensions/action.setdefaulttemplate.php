@@ -41,7 +41,7 @@ if( !isset($params['destmodule']) ) {
   stack_trace();
   die('<br/>Destination module not set');
 }
-$module =& $this->GetModuleInstance($params['destmodule']);
+$module = $this->GetModuleInstance($params['destmodule']);
 if( !is_object($module) ) {
   die('<br/>Could not find destination module'); 
 }

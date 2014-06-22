@@ -51,11 +51,12 @@ class cge_template_admin
    * @param string  The title for this form.  Usually indicates to the administrator what template he is editing.
    * @param string  The file name (relative to the modules templates directory) where the system default version of the 'start' template is.
    * @param string  The info string for the form.
+   * @param bool    A flag indicating a simple form.
    * @return string An HTML form.
    */
   static public function get_start_template_form(&$module,$id,$returnid,
-						 $prefname,$action,$active_tab,
-						 $title,$filename,$info = '')
+                                                 $prefname,$action,$active_tab,
+                                                 $title,$filename,$info = '',$simple = false)
     {
       static $counter = 0;
       $smarty = cmsms()->GetSmarty();
@@ -64,6 +65,7 @@ class cge_template_admin
       $the_template = $module->GetTemplate($prefname);
       if( !$the_template ) $the_template = $module->GetPreference($prefname);
 
+      $smarty->assign('simple',$simple);
       $smarty->assign('defaulttemplateform_title',$title);
       $smarty->assign('info_title',$info);
       $smarty->assign('startform',

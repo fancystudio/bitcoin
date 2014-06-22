@@ -40,7 +40,7 @@
  */
 function cge_CreateInputYesNoDropdown(&$mod,$id,$name,$selectedvalue='',$addtext='')
 {
-  $cgextensions =& $mod->GetModuleInstance('CGExtensions');
+  $cgextensions = $mod->GetModuleInstance('CGExtensions');
   $items = array($cgextensions->Lang('yes')=>1,$cgextensions->Lang('no')=>0);
   return $mod->CreateInputDropdown($id,$name,$items,-1,$selectedvalue,$addtext);
 }

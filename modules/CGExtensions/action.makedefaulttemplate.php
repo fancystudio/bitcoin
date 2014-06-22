@@ -55,7 +55,7 @@ if( !isset( $params['modname'] ) )
     $this->Redirect($id,$the_action,$returnid,$params);
     return;
   }
-$module =& $this->GetModuleInstance($params['modname']);
+$module = $this->GetModuleInstance($params['modname']);
 if( !$module )
   {
     $params['errors'] = $this->Lang('error_insufficientparams');

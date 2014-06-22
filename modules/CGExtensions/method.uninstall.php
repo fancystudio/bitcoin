@@ -35,7 +35,7 @@
 #-------------------------------------------------------------------------
 #END_LICENSE
 
-$db =& $this->GetDb();
+$db = $this->GetDb();
 $taboptarray = array( 'mysql' => 'TYPE=MyISAM' );
 $dict = NewDataDictionary($db);
 

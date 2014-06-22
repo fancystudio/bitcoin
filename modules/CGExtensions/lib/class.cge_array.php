@@ -286,7 +286,7 @@ final class cge_array
       $return = '';
       $values = array_values($data);
       for( $i = 0; $i < count($values); $i++ ) {
-          if( $values[$i] !== '' ) $values[$i] = $quote.$values[$i].$quote;
+          if( strlen($values[$i]) != 0 ) $values[$i] = $quote.$values[$i].$quote;
       }
       return implode($glue,$values);
   }
@@ -300,16 +300,16 @@ final class cge_array
    */
   static public function &to_object($array,$recursive = FALSE)
   {
-    $obj = new StdClass();
-    foreach( $array as $key => $value ) {
-      if( is_array($value) && $recursive ) {
-	$obj->$key = self::to_object($value,$recursive);
+      $obj = new StdClass();
+      foreach( $array as $key => $value ) {
+          if( is_array($value) && $recursive ) {
+              $obj->$key = self::to_object($value,$recursive);
+          }
+          else {
+              $obj->$key = $value;
+          }
       }
-      else {
-	$obj->$key = $value;
-      }
-    }
-    return $obj;
+      return $obj;
   }
 
 
