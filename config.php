@@ -9,9 +9,9 @@ $config['dbms'] = 'mysql';
 //$config['db_name'] = 'kupit_bitcoin';
 
 $config['db_hostname'] = 'mariadb55.websupport.sk';
-$config['db_username'] = 'bitcoindev';
-$config['db_password'] = 'bitcoindev12*';
-$config['db_name'] = 'bitcoindev';
+$config['db_username'] = 'kupitbitcoinDev';
+$config['db_password'] = 'kupitbitcoinDev12*';
+$config['db_name'] = 'kupitbitcoinDev';
 $config['db_port'] = 3310;
 
 //$config['db_hostname'] = 'localhost';
